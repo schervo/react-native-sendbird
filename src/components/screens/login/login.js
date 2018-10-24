@@ -5,6 +5,8 @@ import {
 import {
   Button, Text, Item, Input,
 } from 'native-base'
+import SendBird from 'sendbird'
+import styles from './styles'
 
 class Login extends Component {
   static navigationOptions = {
@@ -17,6 +19,8 @@ class Login extends Component {
     this.state = {
       userName: '',
     }
+
+    this.sb = SendBird.getInstance()
   }
 
   handleChange = (value) => {
@@ -27,16 +31,20 @@ class Login extends Component {
 
   handleLogin = () => {
     const { userName } = this.state
+    const { login, navigation } = this.props
 
-    console.log(userName)
+    login(this.sb, userName)
+      .then(() => {
+        navigation.navigate('Home')
+      })
   }
 
   render() {
     const { userName } = this.state
     return (
-      <View>
+      <View style={styles.container}>
         <View>
-          <Item rounded>
+          <Item rounded style={styles.input}>
             <Input onChangeText={this.handleChange} value={userName} placeholder="Name" />
           </Item>
         </View>
