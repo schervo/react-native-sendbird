@@ -76,6 +76,8 @@ export const getGroupChannels = () => new Promise((resolve, reject) => {
 export const createUserChannel = user => new Promise((resolve, reject) => {
   const sb = SendBird.getInstance()
 
+  console.log(user)
+
   const params = new sb.GroupChannelParams()
   params.isPublic = false
   params.isDistinct = true

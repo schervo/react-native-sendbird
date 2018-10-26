@@ -105,7 +105,7 @@ class CreateChannelScreen extends Component {
           <ListItem icon>
             <Left>
               <Button style={{ backgroundColor: '#FF9501' }}>
-                <Icon active name="lock" />
+                <Icon active type="Ionicons" name="lock" />
               </Button>
             </Left>
             <Body>
