@@ -15,21 +15,6 @@ class HomeScreen extends Component {
     headerTitle: <Text>Home</Text>,
   };
 
-  componentDidMount() {
-    const { getOpenChannels } = this.props
-
-    getOpenChannels()
-  }
-
-  handleUserPress = (channel) => {
-    const { navigation, selectChannel } = this.props
-
-    selectChannel(channel)
-      .then(() => {
-        navigation.navigate('Chat')
-      })
-  }
-
   navigateToUsers = () => {
     const { navigation } = this.props
     navigation.navigate('Users')

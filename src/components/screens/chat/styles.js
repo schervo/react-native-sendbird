@@ -15,6 +15,8 @@ export default StyleSheet.create({
   },
   inputTextContainer: {
     flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   input: {
     flex: 5,

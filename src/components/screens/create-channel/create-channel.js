@@ -30,6 +30,7 @@ class CreateChannelScreen extends Component {
     openChannel: false,
     name: '',
     selectedUsers: [],
+    error: '',
   }
 
   componentDidMount() {
@@ -52,20 +53,29 @@ class CreateChannelScreen extends Component {
   handleChange = (value) => {
     this.setState({
       name: value,
+      error: value ? null : undefined,
     })
   }
 
   handleCreateChannel = () => {
-    const { createChannel } = this.props
+    const { createChannel, navigation } = this.props
     const {
       name, privateChannel, selectedUsers, openChannel,
     } = this.state
 
-    createChannel({
+    if (!name) {
+      return this.setState({
+        error: 'Required',
+      })
+    }
+
+    return createChannel({
       name,
       privateChannel,
       openChannel,
       userIds: selectedUsers,
+    }).then(() => {
+      navigation.goBack()
     })
   }
 
@@ -88,7 +98,7 @@ class CreateChannelScreen extends Component {
 
   render() {
     const {
-      privateChannel, selectedUsers, name, openChannel,
+      privateChannel, selectedUsers, name, openChannel, error,
     } = this.state
     const { users } = this.props
 
@@ -98,6 +108,7 @@ class CreateChannelScreen extends Component {
           <Item rounded>
             <Input onChangeText={this.handleChange} value={name} placeholder="Channel Name" />
           </Item>
+          <Text>{error}</Text>
         </View>
         {
           !openChannel
